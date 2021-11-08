@@ -130,12 +130,13 @@ p#fecha_texto {
 }
 
 p#texto_tecnico {
-  color: #c6c6c6;
-  font-size: 20px;
+  color: #9c9c9c;
+  font-size: 25px;
   font-weight: normal;
-  position: absolute;
+  text-align: center;
+  align-content: center;
+  align-content: center;
   pointer-events: none;
-  top: -20px;
 }
 
 .bar {

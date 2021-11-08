@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="estilos.css">
-</head>
-<body>
-    <form action="">
-        
-<div class="wrapper">
-    <form id="form_ejemplo" onsubmit="return validateForm()">
-      <h1>Formulario</h1>
-      <h5>Formulario Hito 1 DWEC</h5>
-      <hr class="sep"/>
-      <div class="group">
-        <input type="text" required="required"/><span class="highlight"></span><span class="bar"></span>
-        <label>Nombre</label>
-      </div>
-      <div class="group">
-        <input type="text" required="required"/><span class="highlight"></span><span class="bar"></span>
-        <label>Apellidos</label>
-      </div>
-      <div class="group">
-    <p id="fecha_texto">Fecha de Nacimiento</p>
-        <input type="date" required="required"/><span class="highlight"></span><span class="bar"></span>
-      </div>
-      <h5>Color favorito</h5>
-      <div class="group">
-        <input type="color" required="required"/><span class="highlight"></span><span class="bar"></span>
-      </div>
-      <div class="btn-box">
-        <button class="btn btn-submit" type="submit">Enviar</button>
-        <button class="btn btn-cancel" type="button" onclick="limpiar()">Limmpiar</button>
-      </div>
-    </form>
-    <h5 id="texto_a_cambiar">Rellena este formulario o Pulsa el botón de aquí abajo para autorellenar</h5>
-    <p id="texto_tecnico">awgawgawgwa</p>
 
-    <table id="tabla">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+  <form action="">
+    <div class="wrapper">
+      <form id="form_ejemplo" onsubmit="return validateForm()">
+        <h1>Formulario</h1>
+        <p id="texto_tecnico"></p>
+        <button class="btn btn-submit" id="boton_scroll" onclick="obligar(this)">Salir de la página</button>
+        <h5>Formulario Hito 1 DWEC</h5>
+        <hr class="sep" />
+        <div class="group">
+          <input type="text" required="required" /><span class="highlight"></span><span class="bar"></span>
+          <label>Nombre</label>
+        </div>
+        <div class="group">
+          <input type="text" required="required" /><span class="highlight"></span><span class="bar"></span>
+          <label>Apellidos</label>
+        </div>
+        <div class="group">
+          <p id="fecha_texto">Fecha de Nacimiento</p>
+          <input type="date" required="required" /><span class="highlight"></span><span class="bar"></span>
+        </div>
+        <h5>Color favorito</h5>
+        <div class="group">
+          <input type="color" required="required" /><span class="highlight"></span><span class="bar"></span>
+        </div>
+        <div class="btn-box">
+          <button class="btn btn-submit" type="submit">Enviar</button>
+          <button class="btn btn-cancel" type="button" onclick="limpiar(lista_elementos)">Limmpiar</button>
+        </div>
+      </form>
+      <h5 id="texto_a_cambiar">Rellena este formulario.</h5>
+
+
+      <table id="tabla">
         <tr>
           <th>Nombre</th>
           <th>Apellidos</th>
@@ -47,67 +51,104 @@
           <th>Color favorito</th>
         </tr>
         <tr>
-          <td>Alfreds Futterkiste</td>
-          <td>Maria Anders</td>
-          <td>2000-5-10</td>
-          <td>#52f29a</td>
+          <td>Miguel</td>
+          <td>Rodríguez Polo</td>
+          <td>2001-09-11</td>
+          <td style="background-color: #eabd0b;">#eabd0b</td>
         </tr>
       </table>
-  </div>
- 
-  <img src="imagen1.jpg" id="imagen" alt="Imagen1">
+    </div>
+
+    <img src="imagen1.jpg" id="imagen" alt="Imagen1">
 
 
-  <script>
-var imagen = document.getElementById("imagen")
-imagen.hidden = true;
+    <script>
+      lista_elementos = document.querySelectorAll("form div.group input");
+      var imagen = document.getElementById("imagen")
+      valores_input = document.querySelectorAll("div.group input");
+      imagen.hidden = true;
 
-var texto = document.getElementById("texto_tecnico").innerText = "Estás usando el navegador DETECTAR COSAS DE BOM"
+      function fnBrowserDetect() {
+        let userAgent = navigator.userAgent;
+        let browserName;
 
-function limpiar(){
-lista_elementos = document.querySelectorAll("form div.group input");
-lista_elementos.forEach(element => element.value="");
-imagen.hidden = true;
-}
+        if (userAgent.match(/chrome|chromium|crios/i)) {
+          browserName = "Chrome";
+        } else if (userAgent.match(/firefox|fxios/i)) {
+          browserName = "Firefox";
+        } else if (userAgent.match(/safari/i)) {
+          browserName = "Safari";
+        } else if (userAgent.match(/opr\//i)) {
+          browserName = "Opera";
+        } else if (userAgent.match(/edg/i)) {
+          browserName = "Edge";
+        } else {
+          browserName = "Navegador no identificado";
+        }
 
-function validateForm(e) {
-    e.preventDefault();
-bandera= true;
-let resultado = "";
-let nombre = document.querySelectorAll("div.group input[type='text']")[0].value;
-let apellido = document.querySelectorAll("div.group input[type='text']")[1].value;
-let fecha = document.querySelector("form div.group input[type='date']").value;
-let color = document.querySelector("div.group input[type='color']").value;
+        return browserName
+      }
+      var texto = document.getElementById("texto_tecnico").innerText = "Estas usando el navegador " + fnBrowserDetect() + ". Tu ventana tiene " + window.innerWidth + " píxeles de ancho y " + window.innerHeight + " píxeles de alto. Prueba a hacer cambios en la ventana y estos valores se actualizarán Si aun así no quieres hacer el cuestionario, no pasa nada. Solo pulsa este botón"
+      window.addEventListener("resize", function (event) {
+        var texto = document.getElementById("texto_tecnico").innerText = "Estas usando el navegador " + fnBrowserDetect() + ". Tu ventana tiene " + window.innerWidth + " píxeles de ancho y " + window.innerHeight + " píxeles de alto. Prueba a hacer cambios en la ventana y estos valores se actualizarán. Si aun así no quieres hacer el cuestionario, no pasa nada. Solo pulsa este botón"
+      })
 
-if((/[0-9]{1}/g.test(nombre + apellido))){
-resultado+="¡Vaya! un nombre o apellido con números. Creo que eso no está bien. Deberías cambiarlo"
-}else{
-resultado+="Gracias " + nombre + " " + apellido + " por registrarte en el formulario! Naciste el:"+ fecha + " y te gusta el color (en código) " + color + " ¡Disfruta de esta imagen de regalo!"
-limpiar()
-let tabla = document.querySelector("body div.wrapper table#tabla")
-let row = tabla.insertRow(tabla.rows.length);
+      function obligar(texto) {
+        valores_input[0].scrollIntoView()
+        texto.disabled = true;
+        texto.hidden = true;
+        document.getElementById("texto_tecnico").innerHTML = "No puedes salir sin realizar el formulario"
+        window.alert("El formulario es obligatorio")
+      }
 
-row.insertCell(0).innerHTML = nombre;
-row.insertCell(1).innerHTML = apellido;
-row.insertCell(2).innerHTML = fecha;
-row.insertCell(3).innerHTML = color;
+      function limpiar(lista_elementos) {
+        lista_elementos.forEach(element => element.value = "");
+        imagen.hidden = true;
+      }
 
+      function insertar_en_tabla(tabla, cosas_a_insertar) {
+        let row = tabla.insertRow(tabla.rows.length);
+        var arr = Array.from(cosas_a_insertar);
+        arr.forEach(element => {
+          let nueva_celda = row.insertCell(element.index)
+          nueva_celda.innerHTML = element.value;
+          if (/^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/g.test(element.value)) { //Revisar si es un hexadecimal
+            if (parseInt(element.value.replace('#', ''), 16) < 13457078) nueva_celda.style.color = "#FFFFFF"
+            nueva_celda.style.background = element.value
+          }
+        });
+      }
 
-imagen.hidden = false;
-imagen.src="imagen" +(Math.floor(Math.random() * 3)+1) + ".jpg";
-console.log(imagen)
-}
-document.getElementById("texto_a_cambiar").innerText = resultado
-return bandera;
+      function validateForm(e) {
+        e.preventDefault();
+        bandera = true;
+        let resultado = "";
+        let nombre = valores_input[0].value;
+        let apellido = valores_input[1].value;
+        let fecha = valores_input[2].value;
+        let color = valores_input[3].value;
 
-}
+        if ((/[0-9]{1}/g.test(nombre + apellido))) {
+          resultado += "¡Vaya! un nombre o apellido con números. Creo que eso no está bien. Deberías cambiarlo"
+        } else {
+          resultado += "Gracias " + nombre + " " + apellido + " por registrarte en el formulario! Naciste el:" + fecha + " y te gusta el color (en código) " + color + " ¡Disfruta de esta imagen de regalo!"
+          let tabla = document.querySelector("body div.wrapper table#tabla")
+          insertar_en_tabla(tabla, valores_input)
+          limpiar(lista_elementos)
+          imagen.hidden = false;
+          imagen.src = "imagen" + (Math.floor(Math.random() * 3) + 1) + ".jpg";
+        }
+        document.getElementById("texto_a_cambiar").innerText = resultado
+        return bandera;
+      }
 
-  </script>
+    </script>
 
-<script>
+    <script>
 
-    var form = document.getElementsByTagName("form")[0];
-    form.addEventListener('submit', validateForm);
-      </script>
+      var form = document.getElementsByTagName("form")[0];
+      form.addEventListener('submit', validateForm);
+    </script>
 </body>
+
 </html>
