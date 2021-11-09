@@ -11,7 +11,6 @@
 
 <body>
 
-  <form action="">
     <div class="wrapper">
       <form id="form_ejemplo" onsubmit="return validateForm()">
         <h1>Formulario</h1>
@@ -71,7 +70,6 @@
       function fnBrowserDetect() {
         let userAgent = navigator.userAgent;
         let browserName;
-
         if (userAgent.match(/chrome|chromium|crios/i)) {
           browserName = "Chrome";
         } else if (userAgent.match(/firefox|fxios/i)) {
@@ -85,7 +83,6 @@
         } else {
           browserName = "Navegador no identificado";
         }
-
         return browserName
       }
       var texto = document.getElementById("texto_tecnico").innerText = "Estas usando el navegador " + fnBrowserDetect() + ". Tu ventana tiene " + window.innerWidth + " píxeles de ancho y " + window.innerHeight + " píxeles de alto. Prueba a hacer cambios en la ventana y estos valores se actualizarán Si aun así no quieres hacer el cuestionario, no pasa nada. Solo pulsa este botón"
@@ -113,7 +110,7 @@
           let nueva_celda = row.insertCell(element.index)
           nueva_celda.innerHTML = element.value;
           if (/^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/g.test(element.value)) { //Revisar si es un hexadecimal
-            if (parseInt(element.value.replace('#', ''), 16) < 13457078) nueva_celda.style.color = "#FFFFFF"
+            if (parseInt(element.value.replace('#', ''), 16) < 8388607) nueva_celda.style.color = "#FFFFFF"
             nueva_celda.style.background = element.value
           }
         });

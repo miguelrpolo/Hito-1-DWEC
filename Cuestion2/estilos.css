@@ -8,24 +8,27 @@ body {
   background: #424242;
 }
 
+/*table#tabla tr td:last-child{
+
+}*/
 
 form {
   width: 320px;
   margin: 45px auto;
 }
-form h1 {
+h1 {
   font-size: 3em;
   font-weight: 300;
   text-align: center;
   color: #2196F3;
 }
-form h5 {
+h5 {
   text-align: center;
   text-transform: uppercase;
   font-size: x-large;
   color: #c6c6c6;
 }
-form hr.sep {
+hr.sep {
   background: #2196F3;
   box-shadow: none;
   border: none;
@@ -33,7 +36,7 @@ form hr.sep {
   width: 25%;
   margin: 0px auto 45px auto;
 }
-form .emoji {
+.emoji {
   font-size: 1.2em;
 }
 
@@ -207,6 +210,8 @@ h2 {
 }
 
 table {
+  margin-left: auto;
+  margin-right: auto;
   border: 1px solid #ddd !important;
 }
 
